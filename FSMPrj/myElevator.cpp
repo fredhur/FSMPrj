@@ -15,8 +15,10 @@ enum class myState
 	FLOOR2,
 	FLOOR3
 };
+
 class Elevator :public Fsm<Elevator>
 {
+
 public:
 	myState getState()
 	{
@@ -53,7 +55,9 @@ private:
 		{
 			puts("Up2");
 			transition(fsm.floor1);
-			fsm.floor1.event(Up());
+			//fsm.floor1.event(Up());
+			static_cast<typename Elevator::State*>(fsm.state())->event(Up());// 이벤트 두번 호출하려면 해야하는 일.
+			static_cast<typename Elevator::State*>(fsm.state())->event(Up());
 			puts("what?");
 		}
 		 void event(Up)override {
