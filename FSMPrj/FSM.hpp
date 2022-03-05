@@ -29,35 +29,35 @@ void FSMDEBUGPRINT(const char* s)
 
 
 namespace msfsm {
-	template <class FSM>
+	template <class C>
 	class Fsm
 	{
 	protected:
 		// Base class for all states
 		class State {
 		public:
-			State(FSM* fsm) : fsm(*fsm) {}
+			State(C* fsm) : fsm(*fsm) {}
 			virtual ~State() {}
 		private:
 			friend Fsm;
 			virtual void exit() {}
 
 		protected:
-			FSM& fsm;
+			C& fsm;
 
 			// Convenience method
 			template<class S, class ... Types>
-			void transition(S& nextState, Types... args) { fsm.Fsm<FSM>::transition(nextState, args...); }
+			void transition(S& nextState, Types... args) { fsm.Fsm<C>::transition(nextState, args...); }
 		};
 
 		template<class S, class ... Types>
 		void transition(S& nextState, Types... args) {
 			if (m_state)
 				m_state->exit();
-			static_cast<FSM*>(this)->onTransition(nextState);
+			static_cast<C*>(this)->onTransition(nextState);
 			m_state = &nextState;
 			nextState.entry(args...);
-			static_cast<FSM*>(this)->afterTransition();
+			static_cast<C*>(this)->afterTransition();
 		}
 
 		// Call this from derived class destructor if needed. We cannot
@@ -83,7 +83,7 @@ namespace msfsm {
 		void handle(EV event) {
 			if (!m_state)
 				throw std::domain_error(__func__);
-			static_cast<typename FSM::State*>(m_state)->event(event);
+			static_cast<typename C::State*>(m_state)->event(event);
 		}
 	};
 

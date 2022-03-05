@@ -3,6 +3,12 @@
 using namespace std;
 using namespace msfsm;
 
+
+/*
+<---lls---|<-------mbr--------|<--------normal---------      
+	                                     
+---------lls----->|----------mbr-------->|-----normal---->
+*/                       
 class MBRLLSState :public Fsm<MBRLLSState>
 {
 	
