@@ -9,6 +9,23 @@
 #include <stdexcept>
 //#include <boost/type_index.hpp> // Only needed if StateName is used
 
+#define EVENT_CALL(StateClass) static_cast<typename StateClass::State*>(fsm.state())->event
+
+#define DECL_STATE friend Fsm;               \
+                   using Fsm::State::State;
+
+
+#define FSM_DEBUG 0
+
+
+void FSMDEBUGPRINT(const char* s)
+{
+#ifdef FSM_DEBUG
+	std::cout <<"current State " <<  s << std::endl;
+#endif
+	return;
+}
+
 
 
 namespace msfsm {

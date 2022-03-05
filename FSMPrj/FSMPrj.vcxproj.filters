@@ -32,5 +32,8 @@
     <ClCompile Include="stateOut.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="lls_mbr.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
