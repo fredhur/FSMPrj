@@ -6,8 +6,8 @@ class HisTheSisUpDownState {
 public:
     HisTheSisUpDownState();
     void chageState(State* newState);
-    void onPushedRequest();
-    void offPushedRequest();
+    void EventHisUP();
+    void EventHisDown();
 private:
     State* currentState;
 };
@@ -66,21 +66,21 @@ HisTheSisUpDownState::HisTheSisUpDownState() {
 void HisTheSisUpDownState::chageState(State* newState) {
     currentState = newState;
 }
-void HisTheSisUpDownState::onPushedRequest() {
+void HisTheSisUpDownState::EventHisUP() {
     currentState->HisTheSisUpEvent(this);
 }
-void HisTheSisUpDownState::offPushedRequest() {
+void HisTheSisUpDownState::EventHisDown() {
     currentState->HisTheSisDownEvent(this);
 }
 
 int main(int argc, const char* argv[]) {
     //HisTheSisUpDownState* fredhur = new HisTheSisUpDownState();
     HisTheSisUpDownState fredhur;
-    fredhur.onPushedRequest();
-    fredhur.onPushedRequest();
+    fredhur.EventHisUP();
+    fredhur.EventHisUP();
            
-    fredhur.offPushedRequest();
-    fredhur.offPushedRequest();
+    fredhur.EventHisDown();
+    fredhur.EventHisDown();
 
     return 0;
 }
