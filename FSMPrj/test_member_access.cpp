@@ -38,12 +38,14 @@ private:
         }
         void event(Down) override {
             transition(fsm.lower);
+           // fsm.lower.privateLowerMember++;
         }
     } upper{ this };
 
     class Lower : public State {
         friend Fsm;
         using State::State;
+        int privateLowerMember;
         void entry() {
             cout << "Entering lower" << endl;
         }
@@ -59,7 +61,7 @@ private:
 int main(int argc, char* argv[])
 {
     Elevator f;
-
+   // f.upper.privateLowerMember++;
    /* f.upper.entry();
     f.lower.entry();*/
    /* f.state.event(Up());
